@@ -9,15 +9,17 @@
       :current="$route"
     ></base-page-top-menu>
     <nuxt/>
+    <base-footer></base-footer>
   </div>
 </template>
 
 <script>
 import BasePageHeader from '../components/BasePageHeader.vue';
 import BasePageTopMenu from '../components/BasePageTopMenu.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 export default {
   components: {
-    BasePageHeader, BasePageTopMenu
+    BasePageHeader, BasePageTopMenu, BaseFooter
   },
   data: () => {
     return {
@@ -74,6 +76,8 @@ export default {
     }
   },
   mounted() {
+    //@todo
+    this.$store.dispatch('login');
   }
 }
 </script>
