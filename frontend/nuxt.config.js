@@ -42,6 +42,18 @@ module.exports = {
         })
       }
     }
+  },
+
+  modules: [
+    '@nuxtjs/style-resources',
+  ],
+
+  styleResources: {
+    sass: [],
+    scss: [],
+    less: [],
+    stylus: []
   }
+  
 }
 
