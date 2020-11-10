@@ -22,7 +22,36 @@ export default {
   data: () => {
     return {
       menu: {
-        loggedIn: [],
+        loggedIn: [
+          {
+            target: {name: 'profile'},
+            name: 'Профиль'
+          },
+          {
+            target: {name: 'team'},
+            name: 'Команды'
+          },
+          {
+            target: {name: 'competitions'},
+            name: 'Компетенции'
+          },
+          {
+            target: {name: 'hire'},
+            name: 'Найм'
+          },
+          {
+            target: {name: 'grading'},
+            name: 'Грейдирование'
+          },
+          {
+            target: {name: 'work'},
+            name: 'Занятость'
+          },
+          {
+            target: {name: 'polls'},
+            name: 'Опросы'
+          }
+        ],
         notLoggedIn: [
           {
             target: {name: 'auth'},

@@ -15,7 +15,7 @@
         <div class="container-fluid" v-if="tab === 'login'">
             <form>
                 <div class="form-group">
-                    <label for="login">Login</label>
+                    <label for="login">Identity</label>
                     <input type="text" class="form-control" id="login" placeholder="Enter email/phone/login">
                 </div>
                 <div class="form-group">
@@ -26,7 +26,7 @@
                     <input type="checkbox" class="form-check-input" id="rememberCheck">
                     <label class="form-check-label" for="rememberCheck">Remember me</label>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">SUBMIT</button>
+                <button type="button" class="btn btn-primary mt-3" @click="onClickSubmitLogin">SUBMIT</button>
             </form>
         </div>
         <div class="container-fluid" v-if="tab === 'reg'">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-primary" @click="onClickSubmitRegistry">Submit</button>
             </form>
         </div>
     </article>
@@ -69,6 +69,25 @@ export default {
     head() {
         return {
             title: this.title
+        }
+    },
+    methods: {
+        onError() {
+
+        },
+        onClickSubmitLogin() {
+            this.$store.dispatch('login')
+                .then(() => {
+                    this.$router.push('/');
+                })
+                .catch(this.onError);
+        },
+        onClickSubmitRegistry() {
+            this.$store.dispatch('register')
+                .then(() => {
+                    this.$router.push('/');
+                })
+                .catch(this.onError);
         }
     }
 }

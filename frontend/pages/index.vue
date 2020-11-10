@@ -8,7 +8,7 @@
 export default {
     data() {
       return {
-        title: 'Hello World!'
+        title: 'Team Builder'
       }
     },
     head() {
