@@ -1,8 +1,11 @@
 <template>
-    <footer class="footer position-sticky">
+    <footer class="footer mt-5">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <NuxtLink to="/" class="navbar-brand">Team Builder</NuxtLink>
+                <NuxtLink to="/" class="navbar-brand">
+                    <base-icon :size="30" name="x-diamond" class="d-inline-block align-top"></base-icon>
+                    Team Builder
+                </NuxtLink>
             </li>
             <li class="nav-item">
                 <NuxtLink to="/about" class="nav-link">О проекте</NuxtLink>
@@ -16,7 +19,11 @@
 </template>
 
 <script>
+import BaseIcon from './BaseIcon.vue';
 export default {
+    components: {
+        BaseIcon
+    },
     props: {
 
     }

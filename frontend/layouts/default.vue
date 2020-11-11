@@ -82,5 +82,7 @@ export default {
 }
 </script>
 
-<style lang="scss">@import '../sass/theme.scss';</style>
+<style lang="scss">
+@import '../sass/theme.scss';
+</style>
 

@@ -1,13 +1,17 @@
 <template>
     <nav class="header-navbar navbar navbar-light bg-light m-0">
         <div class="left side">{{companyName}}</div>
-        <NuxtLink to="/" class="navbar-brand header-text">Team Builder</NuxtLink>
+        <NuxtLink to="/" class="navbar-brand header-text">
+            Team Builder
+        </NuxtLink>
         <div class="right side">{{userName}}</div>
     </nav>
 </template>
 
 <script>
 export default {
+    components: {
+    },
     props: {
         companyName: {
             type: String,
