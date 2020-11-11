@@ -11,7 +11,7 @@
                     >{{item.name}}</a>
             </li>
             <button class="btn btn-link py-1 px-2 ml-auto" title="Тэги">
-                <base-icon name="three-dots-vertical" :size="18" class="my-0"></base-icon>
+                <base-icon name="tags" :size="18" class="my-0"></base-icon>
             </button>
             <button class="btn btn-link py-1 px-2" title="Добавить компетенцию">
                 <base-icon name="plus-circle" :size="18" class="my-0"></base-icon>
@@ -56,6 +56,11 @@ export default {
                 {id: 5, name: 'Администрирование'},
             ],
             competitions: []
+        }
+    },
+    head() {
+        return {
+            title: 'Компетенции'
         }
     },
     mounted() {
