@@ -1,5 +1,5 @@
 <template>
-    <img :src="getSrc" alt="" :width="size" :height="size" title="Bootstrap">
+    <img :src="getSrc" alt="name" :width="size" :height="size">
 </template>
 
 <script>
