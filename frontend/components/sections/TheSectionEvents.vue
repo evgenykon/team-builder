@@ -18,7 +18,7 @@
                     <div>{{item.time}}</div>
                 </div>
                 <div class="link">
-                    <button type="button" class="btn btn-primary">Learn more</button>
+                    <button type="button" class="btn btn-outline-secondary">Learn more</button>
                 </div>
             </li>
         </ul>

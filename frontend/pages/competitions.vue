@@ -21,7 +21,7 @@
 
         <div class="row pt-2">
             <div class="col-sm-6" v-for="item in competitions" :key="item.id">
-                <div class="card mb-2">
+                <div class="card mb-3">
                     <div class="card-body py-1 d-flex flex-row">
                         <div class="content">
                             <h5 class="card-title">{{item.name}}</h5>
