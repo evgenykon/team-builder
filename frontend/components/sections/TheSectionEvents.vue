@@ -23,7 +23,7 @@
             </li>
         </ul>
         <p class="mt-3 text-center">
-            <button type="button" class="btn btn-primary">Показать все события</button>
+            <button type="button" class="btn btn-primary" @click="onClickLoadMore">Показать другие события</button>
         </p>
     </article>
 </template>
@@ -52,6 +52,21 @@ export default {
                     time: '10:00 - 12:00'
                 }
             ]
+        }
+    },
+    methods: {
+        onClickLoadMore() {
+            //@todo dispatch
+            this.events.push(
+                {
+                    id: (new Date).getTime(),
+                    date: new Date(),
+                    title: 'Event title old',
+                    subtitle: 'Subtitle',
+                    city: 'Moscow',
+                    address: 'Lomonosova 8',
+                    time: '10:00 - 12:00'
+                });
         }
     }
 }
