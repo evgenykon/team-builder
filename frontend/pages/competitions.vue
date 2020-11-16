@@ -2,52 +2,114 @@
     <div class="container" v-if="$store.getters.getUser">
         <h2 class="text-center">Компетенции</h2>
 
-        <ul class="nav nav-tabs">
-            <li class="nav-item" v-for="item in tags" :key="item.id">
-                <a class="nav-link" 
-                    :href="'#' + item.id" 
-                    :class="{'active': tab && item.id === tab.id}"
-                    @click="onClickTab(item)"
-                    >{{item.name}}</a>
-            </li>
-            <button class="btn btn-link py-1 px-2 ml-auto" title="Тэги">
+        <base-tabs :tabs="tags" :active="tab" v-on:tab-change="onTabChange">
+            <button class="btn btn-link py-1 px-2 ml-auto" title="Тэги" @click="flags.isVisibleModalTags = true">
                 <base-icon name="tags" :size="18" class="my-0"></base-icon>
             </button>
-            <button class="btn btn-link py-1 px-2" title="Добавить компетенцию">
+            <button class="btn btn-link py-1 px-2" title="Добавить компетенцию"  @click="flags.isVisibleModalAddCompetition = true">
                 <base-icon name="plus-circle" :size="18" class="my-0"></base-icon>
             </button>
-            
-        </ul>
+        </base-tabs>
 
-        <div class="row pt-2">
-            <div class="col-sm-6" v-for="item in competitions" :key="item.id">
-                <div class="card mb-3">
-                    <div class="card-body py-1 d-flex flex-row">
-                        <div class="content">
-                            <h5 class="card-title">{{item.name}}</h5>
-                            <p class="card-text">{{item.description}}</p>
+        <base-card-tile :tiles="competitions">
+            <template v-slot:default="slotParams">
+                <div class="content p-2">
+                    <h5 class="card-title">{{slotParams.tile.name}}</h5>
+                    <p class="card-text">{{slotParams.tile.description}}</p>
+                </div>
+                <div class="btns ml-auto d-flex flex-column">
+                    <a href="#" class="btn btn-link p-2 text-right">Сотрудники ({{slotParams.tile.member_count}})</a>
+                    <a href="#" class="btn btn-link p-2 pb-0 text-right">Задачи ({{slotParams.tile.task_count}})</a>
+                </div>
+                <div class="pt-0">
+                    <a href="#" class="p-1 d-flex text-right">
+                        <base-icon name="trash" :size="12" class="my-0"></base-icon>
+                    </a>
+                </div>
+            </template>
+        </base-card-tile>
+
+        <base-modal v-if="flags.isVisibleModalTags" title="Управление тэгами" v-on:close="flags.isVisibleModalTags = false">
+            <template v-slot:body>
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <button type="button" class="btn btn-primary">Добавить</button>
                         </div>
-                        <div class="btns ml-auto d-flex flex-column">
-                            <a href="#" class="btn btn-link p-2 text-right">Сотрудники ({{item.member_count}})</a>
-                            <a href="#" class="btn btn-link p-2 text-right">Задачи ({{item.task_count}})</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4" v-for="item in tags" :key="item.id">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Tag" :value="item.name" />
+                                    <div class="input-group-append" id="button-addon4">
+                                        <button class="btn btn-outline-secondary btn-sm" type="button">
+                                            <base-icon name="check" :size="18"></base-icon>
+                                        </button>
+                                        <button class="btn btn-outline-secondary btn-sm" type="button">
+                                            <base-icon name="x" :size="18"></base-icon>
+                                        </button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </template>
+        </base-modal>
+
+        <base-modal v-if="flags.isVisibleModalAddCompetition" title="Добавление компетенции" v-on:close="flags.isVisibleModalAddCompetition = false">
+            <template v-slot:body>
+                <div class="form-group row">
+                    <label for="component_name" class="col-sm-2 col-form-label">Наименование</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" value="" id="component_name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="component_description" class="col-sm-2 col-form-label">Описание</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="component_description">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="component_description" class="col-sm-2 col-form-label">Тэг</label>
+                    <div class="col-sm-10">
+                    <select class="form-control">
+                        <template v-for="tag in tags">
+                        <option :value="tag.id" :key="tag.id">{{tag.name}}</option>
+                        </template>
+                    </select>
+                    </div>
+                </div>
+            </template>
+            <template v-slot:buttons>
+                <button type="button" class="btn btn-primary">Сохранить</button>
+            </template>
+        </base-modal>
 
     </div>
 </template>
 
 <script>
 import BaseIcon from '../components/BaseIcon.vue';
+import BaseTabs from '../components/BaseTabs.vue';
+import BaseCardTile from '../components/BaseCardTile.vue';
+import BaseModal from '../components/BaseModal.vue';
+
 export default {
     components: {
-        BaseIcon
+        BaseIcon, BaseTabs, BaseCardTile, BaseModal
     },
     data() {
         return {
             tab: null,
+            flags: {
+                isVisibleModalTags: false,
+                isVisibleModalAddCompetition: false
+            },
             tags: [
                 {id: 1, name: 'UI/UX и дизайн'},
                 {id: 2, name: 'Аналитика'},
@@ -64,39 +126,18 @@ export default {
         }
     },
     mounted() {
-        this.onClickTab(this.tags[0]);
+        this.onTabChange(this.tags[0]);
     },
     methods: {
-        onClickTab(item) {
+        onTabChange(item) {
             this.tab = item;
             //@todo dispatch
             this.competitions.push({
-                id: 1,
+                id: (new Date).getTime(),
                 name: 'Express.js',
                 description: 'Node.js framework',
-                member_count: 1,
-                task_count: 15
-            });
-            this.competitions.push({
-                id: 2,
-                name: 'Mongo',
-                description: 'noSQL database',
-                member_count: 2,
-                task_count: 7
-            });
-            this.competitions.push({
-                id: 3,
-                name: 'Vue.js',
-                description: 'frontend framework',
-                member_count: 3,
-                task_count: 6
-            });
-            this.competitions.push({
-                id: 4,
-                name: 'Webpack',
-                description: 'frontend bundler',
-                member_count: 2,
-                task_count: 5
+                member_count: (new Date).getTime(),
+                task_count: (new Date).getTime()
             });
         }
     }
