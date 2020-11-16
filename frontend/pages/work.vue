@@ -19,13 +19,24 @@
                     <dt class="col-sm-4">Участие в команде</dt>
                     <dd class="col-sm-8">-</dd>
                     <dt class="col-sm-4">Оценка загруженности</dt>
-                    <dd class="col-sm-8">3 из 5 <a href="#"><base-icon name="segmented-nav" :size="16"></base-icon></a></dd>
+                    <dd class="col-sm-8">
+                        <div class="progress">
+                            <div class="progress-bar" 
+                                role="progressbar" 
+                                style="width: 60%;" 
+                                aria-valuenow="60" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100">3 из 5</div>
+                        </div>
+                    </dd>
                     <dt class="col-sm-4">Последняя отслеживаемая активность</dt>
                     <dd class="col-sm-8">15 минут назад (коммит в репозиторий)</dd>
                     <dt class="col-sm-4">Коммитов в день</dt>
                     <dd class="col-sm-8">5</dd>
                     <dt class="col-sm-4">Взаимодействие с командой (месяц)</dt>
-                    <dd class="col-sm-8">высокое (3 оценки, 1 грейдирование, 1 лидерство)</dd>
+                    <dd class="col-sm-8">
+                        <a href="#link-to-profile-command-tab">высокое (3 оценки, 1 грейдирование, 1 лидерство)</a>
+                    </dd>
                 </dl>
             </div>
         </div>
